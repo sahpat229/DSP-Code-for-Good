@@ -68,7 +68,7 @@ def dataTimeDivandFourier(data, time_slots, fourier_slots):
 
 
 def populateData():
-	autisminput = ["Hell", "Am", "Goo"]
+	autisminput = ["Hello", "Am", "Goo"]
 	parentinput = ["Hello", "A", "Good"]
 
 	if (len(autisminput) != len(parentinput)):

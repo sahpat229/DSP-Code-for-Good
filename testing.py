@@ -94,8 +94,7 @@ def getOutputs(inputstring, realstring):
 			string_outputs.append(real_arr[minimumind])
 		else:
 			return real_arr[autism_arr.index(autismstring)]
-	return string_outputs
-
+	
 	# for autismstring in autisminput:
 	# 	if autismstring not in autism_arr:
 	# 		filename = autismstring + ".wav"
@@ -126,3 +125,53 @@ def getOutputs(inputstring, realstring):
 	# 				minimumind = index
 	# 	else:
 	# 		return real_arr[autism_arr.index(autismstring)]
+
+
+
+	# for autismstring in autisminput:
+	# 	if autismstring not in autism_arr:
+	# 		filename = autismstring + ".wav"
+	# 		urlretrieve("http://api.voicerss.org/?key=04f49802d32d442ca997d4d2ea76d3d5&hl=en-us&c=wav&src="+autismstring, filename)
+	# 		rate, data = wav.read(filename)
+	# 		realfingers = dataTimeDivandFourier(data, 300, 10)
+	# 		realfingers2 = []
+	# 		for guy in realfingers:
+	# 			for guy2 in guy:
+	# 				realfingers2.append(guy2)
+
+
+	# 		minindexarr = []
+	# 		start = 0
+	# 		while (start < 3000):
+	# 			minindex = -1
+	# 			minimum = 10000000000
+	# 			curr2 = realfingers2[start:start+300]
+	# 			for index in range(len(fingerprintsarr)):
+	# 				curr = fingerprintsarr[index][start:start+300]
+	# 				suma = 0
+	# 				for index2 in range(len(curr)):
+	# 					suma += abs(curr[index2] - curr2[index2])
+	# 				if suma < minimum:
+	# 					minimum = suma
+	# 					minindex = index
+	# 				start += 300
+	# 			minindexarr.append(minindex)
+
+	# 		start = minindexarr[0]
+	# 		maximums = [0 for i in range(len(real_arr))]
+	# 		maximums[start] = 1
+	# 		contiguous = 1
+	# 		for index in range(1, len(minindexarr)):
+	# 			if minindexarr[index] == start:
+	# 				contiguous += 1
+	# 				if contiguous > maximums[minindexarr[index]]:
+	# 					minindexarr[index] = contiguous
+	# 			else:
+	# 				contiguous = 1
+	# 			start = minindexarr[index]
+	# 		index_to_add = max(minindexarr)
+	# 		index_to_add = minindexarr.index(index_to_add)
+	# 		string_outputs.append(real_arr[index_to_add])
+	# 	else:
+	# 		string_outputs.append(real_arr[autism_arr.index(autismstring)])
+	# return string_outputs
