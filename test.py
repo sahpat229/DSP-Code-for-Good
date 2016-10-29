@@ -3,8 +3,8 @@ import sys
 import numpy as np
 from pydub import AudioSegment
 from pydub.silence import split_on_silence
-# from scipy.io import wavfile as wav
-# from scipy.fftpack import fft
+from scipy.io import wavfile as wav
+from scipy.fftpack import fft
 
 
 

@@ -1,23 +1,42 @@
 from scipy.io import wavfile as wav
 from scipy.fftpack import fft
-from urllib.request import urlretrieve
+from urllib import urlretrieve
 import numpy as np
+import matplotlib.pyplot as plt
+import sys
+import re
+import speech_recognition as sr
 
 
+r = sr.Recognizer()
+with sr.AudioFile('Recording.wav') as source:
+	audio = r.record(source)
+
+try:
+	autisminput = ""
+	autism_input = re.sub("[^\w]", " ", r.recognize_google(audio)).split()
+	for word in autism_input:
+		autisminput += word
+    	autisminput += "\t"
+   	autisminput = autisminput[:len(autisminput)]		
+
+except sr.UnknownValueError:
+    print("Google Speech Recognition could not understand audio")
+except sr.RequestError as e:
+    print("Could not request results from Google Speech Recognition service; {0}".format(e))
+    
 #received autisminput, parentinput
 
-autisminput = split(' ', autisminput)
-parentinput = split(' ', parentinput)
-
-#get wav input of text to speech
-
-dtft_output = ""
+#autisminput = split(' ', autisminput)
+#parentinput = split(' ', parentinput)
 
 
 def dataFourier(time_slot, fourier_slots):
 	fft_time_slot = fft(time_slot)
 	d = len(fft_time_slot) / 2
-	fft_time_slot = abs(fft_time_slot[d, :], 'r')
+	fft_time_slot = abs(fft_time_slot[d:])
+	#plt.plot(fft_time_slot, 'r')
+	#plt.show()
 	counter_2 = 0
 	fourier_skip = len(fft_time_slot) / fourier_slots
 	fourier_values = []
@@ -47,22 +66,37 @@ def dataTimeDivandFourier(data, time_slots, fourier_slots):
 			time_values.append(dataFourier(new_data, fourier_slots))
 	return time_values
 
-for i in range(len(autisminput)):
-	item = autisminput[i]
-	dtft_output = dtft_output + item + "|"
-	filename = item+".wav"
-	urlretrieve("http://api.voicerss.org/?key=04f49802d32d442ca997d4d2ea76d3d5"
-        "&hl=en-us&c=wav&src="+item, filename)
-    rate, data = wav.read(filename)
-    realitem = parentinput[i]
-    timefingers = dataTimeDivandFourier(data, 300, 10)
-    time_str_output = ','.join(str(x) for x in timefingers)
-    dtft_output += time_str_output
-    dtft_output += "|"
-    dtft_output += realitem
-    dtft_output += "&"
 
-dtft_output = dtft_output[:len(dtft_output) - 1]
+def populateData():
+	autisminput = ["Hell", "Am", "Goo"]
+	parentinput = ["Hello", "A", "Good"]
+
+	if (len(autisminput) != len(parentinput)):
+		sys.exit()
+
+	#get wav input of text to speech
+
+	dtft_output = ""
+
+	for i in range(len(autisminput)):
+		item = autisminput[i]
+		dtft_output = dtft_output + item + "|"
+		filename = item+".wav"
+		urlretrieve("http://api.voicerss.org/?key=04f49802d32d442ca997d4d2ea76d3d5&hl=en-us&c=wav&src="+item, filename)
+		rate, data = wav.read(filename)
+		realitem = parentinput[i]
+		timefingers = dataTimeDivandFourier(data, 300, 10)
+		#print "TIMEFINGERS:", timefingers
+		for arr in timefingers:
+			for item in arr:
+				dtft_output += str(item)
+				dtft_output += ","
+		dtft_output = dtft_output[:len(dtft_output) - 1]
+		dtft_output += "|"
+		dtft_output += realitem
+		dtft_output += "&"
+
+	return dtft_output[:len(dtft_output) - 1]
 
 
 
