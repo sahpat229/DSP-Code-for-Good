@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var database = require('./routes/database');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/database', database);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,6 +47,10 @@ if (app.get('env') === 'development') {
     });
   });
 }
+
+app.get('/database', function(req,res) {
+    res.send('Hello World!');
+});
 
 // production error handler
 // no stacktraces leaked to user
