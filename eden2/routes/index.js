@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var jquery = require('jquery');
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -24,19 +25,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/kids', function(req, res, next) {
-	// var listOfKids = getListOfKids ();
     con.query('SELECT * FROM Children',function(err,rows){
       if(err) throw err;
 
       console.log('Data received from Db:\n');
       console.log(rows);
-      res.render('kids', { title: 'Kids Page', children: rows });
+      res.render('kids', { title: 'Your Kids', children: rows });
     });
 
 });
 
-router.get('/interpret', function(req, res, next) {
-	res.render('interpret', { title: 'Interpret Speech', text: dbQueryForInterpretSpeech() });
+router.get('/kids/interpret', function(req, res, next) {
+	res.render('interpret', { title: 'Interpret Speech' });
 });
 
 module.exports = router;
+module.exports = jquery;
