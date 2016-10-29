@@ -2,6 +2,14 @@
 List the kids here.
 <list>
 {{#each children}}
+<div class="col-xs-8 col-sm-8">
 <li>{{name}}</li>
+</div>
+<div class="col-xs-2 col-sm-2">
+<a href="/train/{{id}}">Train</a>
+</div>
+<div class="col-xs-2 col-sm-2">
+<a href="/interpret/{{id}}">Interpret</a>
+</div>
 {{/each}}
 </list>
