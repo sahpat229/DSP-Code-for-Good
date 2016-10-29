@@ -21,6 +21,9 @@ try:
             output.append(train.get(word))
         else:
             output.append(word)
+    s_output = ""
+    for word in output:
+        s_output += word + '&' 
     #Pass to Shalin
 except sr.UnknownValueError:
     print("Google Speech Recognition could not understand audio")

@@ -13,7 +13,10 @@ with sr.AudioFile(AUDIO_FILE) as source:
 
 try:
     print("Google Speech Recognition thinks you said " + r.recognize_google(audio))
-    #autismoinput = re.sub("[^\w]", " ", r.recognize_google(audio)).split()
+    autismoinput = re.sub("[^\w]", " ", r.recognize_google(audio)).split()
     count  = len(autismoinput)
-    #Send count and autismoinput to shalin
+    s_autismoinput = str(count) + ','
+    for word in autismoinput:
+        shalin += word + '&' 
+    #Send count and s_autismoinput to shalin
     
