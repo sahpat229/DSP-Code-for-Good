@@ -35,8 +35,8 @@ def dataFourier(time_slot, fourier_slots):
 	fft_time_slot = fft(time_slot)
 	d = len(fft_time_slot) / 2
 	fft_time_slot = abs(fft_time_slot[d:])
-	#plt.plot(fft_time_slot, 'r')
-	#plt.show()
+	# plt.plot(fft_time_slot, 'r')
+	# plt.show()
 	counter_2 = 0
 	fourier_skip = len(fft_time_slot) / fourier_slots
 	fourier_values = []
@@ -68,7 +68,7 @@ def dataTimeDivandFourier(data, time_slots, fourier_slots):
 
 
 def populateData():
-	autisminput = ["Hello", "Am", "Goo"]
+	autisminput = ["Heloo", "Am", "Goo"]
 	parentinput = ["Hello", "A", "Good"]
 
 	if (len(autisminput) != len(parentinput)):
